@@ -6,7 +6,7 @@ Framework yang popular dan mudah dipelajari untuk pengembangan aplikasi SPA bagi
 
 Pada tutorial kali ini, akan membuat aplikasi dengan Backbone. Langsung saja, gambar berikut merupakan struktur file dari aplikasi dengan backbone.
 
-[caption id="attachment_538" align="alignleft" style="clear:both" width="192" class=" "]<a href="https://emul85.files.wordpress.com/2014/08/struktur-backbone.jpg"><img class="size-full wp-image-538" src="http://emul85.files.wordpress.com/2014/08/struktur-backbone.jpg" alt="mulyono, backbone, spa" width="192" height="210" /></a> Struktur Backbone[/caption]
+<a href="https://emul85.files.wordpress.com/2014/08/struktur-backbone.jpg"><img class="size-full wp-image-538" src="http://emul85.files.wordpress.com/2014/08/struktur-backbone.jpg" alt="mulyono, backbone, spa" width="192" height="210" /></a>
 
 Anda bisa mendownload library-nya dilink berikut :
 Backbone = http://backbonejs.org/
@@ -15,3 +15,46 @@ jQuery = http://jquery.com/
 
 Kemudian untuk file index.html seperti berikut:
 <a href="https://emul85.files.wordpress.com/2014/08/backbone-index.jpg"><img class="size-full wp-image-543 alignleft" src="http://emul85.files.wordpress.com/2014/08/backbone-index.jpg" alt="Backbone, mulyono, tutorial, web design, web e-commerce" width="640" height="315" /></a>
+
+kemudian file app.js merupakan logic dari aplikasi ini dan berikut isinya
+[sourcecode language="javascript"]
+var AppRouter = Backbone.Router.extend({
+	routes:{
+		"":"home",
+		"about" : "about",
+		"produk/:id":"produk",
+	},
+	initialize:function(){
+		this.menu = '<h4>Menu</h4>'+
+			'<ul>'+
+				'<li><a href="#" >Home</a></li>'+
+				'<li><a href="#about" >About</a></li>'+
+				'<li><a href="#produk/11" >Produk</a></li>'+
+			'</ul>'
+	},
+	home:function(){
+		var html = '<div class="header">Backbone</div>'+
+			'<div class="isi">Home page</div>';
+		html = html + this.menu;
+		$('#konten').html(html);
+	},
+	about:function(){
+		var html = '<div class="header">Backbone</div>'+
+			'<div class="isi">About page</div>';
+		html = html + this.menu;
+		$('#konten').html(html);
+	},
+	produk:function(id){
+		var html = '<div class="header">Backbone</div>'+
+			'<div class="isi">Produk page dengan id = '+ id +'</div>';
+		html = html + this.menu;
+		$('#konten').html(html);
+	}
+});
+
+
+$(document).ready(function () {
+	var app = new AppRouter();
+	Backbone.history.start();
+});
+[/sourcecode]
